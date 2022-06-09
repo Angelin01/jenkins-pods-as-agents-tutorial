@@ -1,0 +1,18 @@
+# Jetbrains
+*.iml
+.idea/
+
+# Vscode
+.vscode/
+
+# Node
+node_modules/
+dist/
+
+# Python
+__pypackages__/
+__pycache__/
+venv/
+
+# Project
+resources/report.json

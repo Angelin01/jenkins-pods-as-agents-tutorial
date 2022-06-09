@@ -1,0 +1,39 @@
+{
+  "name": "sample-project",
+  "version": "0.1.0",
+  "description": "A sample node typescript project",
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Angelin01/jenkins-pods-as-agents-tutorial.git"
+  },
+  "keywords": [
+    "jenkins",
+    "kubernetes",
+    "tutorial",
+    "agents",
+    "pods",
+    "ci-cd"
+  ],
+  "contributors": [
+    "Angelo Borsoi Ross"
+  ],
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Angelin01/jenkins-pods-as-agents-tutorial/issues"
+  },
+  "homepage": "https://github.com/Angelin01/jenkins-pods-as-agents-tutorial",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "16.11.26",
+    "typescript": "4.7.2"
+  },
+  "engines": {
+    "node": "18.2.0"
+  },
+  "private": true
+}
