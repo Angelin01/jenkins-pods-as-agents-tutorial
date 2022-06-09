@@ -1,7 +1,7 @@
 {
-  "name": "sample-project",
+  "name": "super-report-printer",
   "version": "0.1.0",
-  "description": "A sample node typescript project",
+  "description": "Report printing project",
   "scripts": {
     "build": "tsc --build",
     "clean": "tsc --build --clean",
