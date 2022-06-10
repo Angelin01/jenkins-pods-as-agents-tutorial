@@ -7,7 +7,7 @@ COPY tsconfig.json .
 COPY tsconfig.base.json .
 COPY ./src ./src
 
-RUN npm install && \
+RUN npm ci && \
     npm run build && \
     npm prune --production
 
