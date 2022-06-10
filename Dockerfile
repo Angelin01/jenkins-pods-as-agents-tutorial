@@ -3,12 +3,12 @@ FROM node:18.2.0-alpine3.15 as build
 WORKDIR /app
 
 COPY ./package*.json .
-COPY tsconfig.json .
-COPY tsconfig.base.json .
+RUN npm ci
+
+COPY tsconfig*.json .
 COPY ./src ./src
 
-RUN npm ci && \
-    npm run build && \
+RUN npm run build && \
     npm prune --production
 
 FROM node:18.2.0-alpine3.15
