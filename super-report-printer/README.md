@@ -1,11 +1,12 @@
-# jenkins-pods-as-agents-tutorial
-Jenkins Pods as Agents Tutorial Sample Project
+# Super Report Printer
 
 This application prints a report on our metrics to show how amazing we are!
 
+It uses some Python to generate the report and then Node to print it!
+
 ## Requirements:
 
-Python >= 3.7
+Python >= 3.7  
 Node >= 16
 
 ## Report

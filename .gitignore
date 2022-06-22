@@ -15,4 +15,4 @@ __pycache__/
 venv/
 
 # Project
-resources/report.json
+**/resources/report.json
