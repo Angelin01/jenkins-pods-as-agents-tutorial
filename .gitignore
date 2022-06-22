@@ -14,5 +14,8 @@ __pypackages__/
 __pycache__/
 venv/
 
+# Rust
+target/
+
 # Project
 **/resources/report.json
