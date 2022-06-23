@@ -8,7 +8,7 @@ We missed using Node, so we now use it to generate the report instead.
 
 ## Requirements:
 
-Rust 2021 edition  
+Rust >= 1.58  
 Node >= 16
 
 ## Report

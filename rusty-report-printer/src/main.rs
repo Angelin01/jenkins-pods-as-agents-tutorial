@@ -1,5 +1,3 @@
-#![feature(format_args_capture)]
-
 use std::{fs, process};
 use std::thread::sleep;
 use std::time::Duration;
