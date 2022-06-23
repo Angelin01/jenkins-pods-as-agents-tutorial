@@ -1,0 +1,60 @@
+import groovy.transform.Field
+
+// We need this because of the mono repo :(
+@Field String PROJECT_DIR = 'rusty-report-printer'
+
+pipeline {
+    agent {
+        kubernetes {
+            yaml '''
+              # Your pod goes here, you can erase this comment
+            '''
+        }
+    }
+
+    options {
+        buildDiscarder logRotator(numToKeepStr: '10')
+        disableConcurrentBuilds()
+        timeout(time: 10, unit: 'MINUTES')
+    }
+
+    stages {
+        stage('Generate Report') {
+            steps {
+                dir(PROJECT_DIR) {
+                    sh './report_generator.js'
+                }
+            }
+        }
+
+        stage('Install dependencies') {
+            steps {
+                dir(PROJECT_DIR) {
+                    sh 'cargo update --locked'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir(PROJECT_DIR) {
+                    sh 'cargo build --locked'
+                }
+            }
+        }
+
+        // Oh no, we can't perform regular Docker Builds on Kubernetes
+        /*
+        stage('Build Image') {
+            environment {
+                DOCKER_BUILDKIT = "1"
+            }
+            steps {
+                dir(PROJECT_DIR) {
+                    sh 'docker build -t super-report-printer:v0.1.0 .'
+                }
+            }
+        }
+         */
+    }
+}
