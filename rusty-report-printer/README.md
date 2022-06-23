@@ -48,3 +48,11 @@ docker build -t rusty-report-printer:v0.1.0 .
 ```
 
 Note: you also need the report above to have been generated!
+Note 2: on alpine you require `musl-dev` to be installed, otherwise you will get an error like:
+```
+  = note: /usr/lib/gcc/x86_64-alpine-linux-musl/10.3.1/../../../../x86_64-alpine-linux-musl/bin/ld: cannot find crti.o: No such file or directory
+          collect2: error: ld returned 1 exit status
+          
+
+error: could not compile `serde_derive` due to previous error
+```
