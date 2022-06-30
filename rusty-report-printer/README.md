@@ -9,7 +9,7 @@ We missed using Node, so we now use it to generate the report instead.
 ## Requirements:
 
 Rust >= 1.58  
-Node >= 16
+Node >= 18
 
 ## Report
 
