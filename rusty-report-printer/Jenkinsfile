@@ -6,8 +6,17 @@ import groovy.transform.Field
 pipeline {
     agent {
         kubernetes {
+            defaultContainer 'node'
             yaml '''
-              # Your pod goes here, you can erase this comment
+              spec:
+                containers:
+                    - name: rusty
+                    image: rust:1.58.1
+                    command: ["sleep", "infinity"]
+                    - name: node
+                    image: node:18.11.0-alpine
+                    command: ["sleep", "infinity"]
+
             '''
         }
     }
@@ -37,9 +46,11 @@ pipeline {
 //        }
 
         stage('Build') {
-            steps {
-                dir(PROJECT_DIR) {
-                    sh 'cargo build --locked'
+            container('python') {
+                steps {
+                    dir(PROJECT_DIR) {
+                        sh 'cargo build --locked'
+                    }
                 }
             }
         }
