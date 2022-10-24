@@ -46,7 +46,7 @@ pipeline {
 //        }
 
         stage('Build') {
-            container('python') {
+            container('rusty') {
                 steps {
                     dir(PROJECT_DIR) {
                         sh 'cargo build --locked'
