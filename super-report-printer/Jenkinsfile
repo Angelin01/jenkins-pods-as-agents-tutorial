@@ -5,7 +5,21 @@ import groovy.transform.Field
 
 pipeline {
     // We should really use some specific agent, we are getting crashes on some agents without Node or Docker!
-    agent any
+    agent {
+        kubernetes {
+            defaultContainer 'node'
+            yaml '''
+            spec:
+              containers:
+                - name: node
+                  image: node:16.15-alpine3.16
+                  command: ["sleep", "infinity"]
+                - name: python
+                  image: python:3.10-alpine3.16
+                  command: ["sleep", "infinity"]
+            '''
+        }
+    }
 
     options {
         buildDiscarder logRotator(numToKeepStr: '10')
@@ -17,7 +31,9 @@ pipeline {
         stage('Generate Report') {
             steps {
                 dir(PROJECT_DIR) {
-                    sh './report_generator.py'
+                    container('python') {
+                        sh './report_generator.py'
+                    }
                 }
             }
         }
@@ -38,17 +54,17 @@ pipeline {
             }
         }
 
-        stage('Build Image') {
-            environment {
-                DOCKER_BUILDKIT = "1"
-            }
-            steps {
-                dir(PROJECT_DIR) {
-                    // Some of our agents don't have Docker, what do we do?
-                    // Also, we are always tagging with the same tag! Help!
-                    sh 'docker build -t super-report-printer:v0.1.0 .'
-                }
-            }
-        }
+        // stage('Build Image') {
+        //     environment {
+        //         DOCKER_BUILDKIT = "1"
+        //     }
+        //     steps {
+        //         dir(PROJECT_DIR) {
+        //             // Some of our agents don't have Docker, what do we do?
+        //             // Also, we are always tagging with the same tag! Help!
+        //             sh 'docker build -t super-report-printer:v0.1.0 .'
+        //         }
+        //     }
+        // }
     }
 }
